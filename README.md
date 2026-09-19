@@ -8,6 +8,8 @@ CargoGuard is a full-stack operations workspace: classify a mixed inbox, identif
 
 **Source:** https://github.com/forlorinna/CargoGuard-AI
 
+**Measured organizer-evaluator result (19 September 2026): final score 1.0 / 1.0 across all 520 participant emails.** End-to-end: 46/46; Stage-1 Macro-F1: 1.0; Stage-3 Defect-F1: 1.0; review escalation precision/recall/F1: 1.0. These are actual `/submit` responses from the unmodified organizer service, run natively with Python because Docker/WSL were unavailable. This is a result on the supplied dataset, not an unseen-data or production accuracy claim. See [the evaluation log](docs/EVALUATION.md) and [returned scoreboard](docs/evaluation/001-baseline-score.json).
+
 ## Product
 
 - **Dashboard:** actual processing totals, inbox composition, and exception list.
@@ -187,10 +189,12 @@ It serves inbox data on port 8080 and keeps reference answers server-side. Parti
 Submit your predictions once that service is available:
 
 ```sh
-python scripts/evaluate.py --url http://localhost:8080
+python scripts/evaluate.py --url http://localhost:8080 --runtime docker --note "Describe the engine change or baseline being evaluated."
 ```
 
-The adapter saves `exports/official-score.json` only on a successful real response. The official score uses 50% end-to-end defect detection, 30% classification macro-F1, and 20% defect F1; reliability is separately reported. No official score was obtained in this environment: Docker was unavailable and port 8080 refused the connection. The bundled organizer answer file was deliberately excluded from inspection and use.
+Use `--runtime native-python` when running the organizer service without Docker, or `--runtime remote` for an organizer-hosted API. The adapter verifies `/health`, checks that submission IDs exactly cover the public `/emails` inbox, and then calls `/submit`. Each attempt creates an ignored timestamped folder under `exports/evaluation-runs/` containing its submission snapshot, returned score when available, and run record with the change note, source revision, engine hashes, submission hash, runtime, and outcome. It updates `exports/official-score.json` only after a successful validated response; a failed attempt leaves any previous successful score unchanged.
+
+The official score uses 50% end-to-end defect detection, 30% classification macro-F1, and 20% defect F1; reliability is separately reported. Two real evaluations returned **1.0** for all these axes and the final score. Docker and WSL were unavailable, so the organizer's unchanged FastAPI application and scoring module ran in an isolated Python environment on `127.0.0.1:8080`. Their hashes match the original ZIP. Only the organizer service consumed its opaque reference data internally; CargoGuard did not inspect labels, access the judge endpoint, or use generator code. Docker-container validation itself remains unperformed. Native-service reproduction and the full run history are documented in [docs/EVALUATION.md](docs/EVALUATION.md).
 
 ## Tests and observed results
 
@@ -207,7 +211,7 @@ Start the app before API tests. They use disposable, isolated synthetic-data ses
 - Complete corpus: **520 emails, 250 attachments, 220 comparison requests**.
 - Machine outcomes: **63 matching pairs, 46 discrepant pairs, 91 awaiting-document requests, 20 review cases, 300 other-category messages**.
 - Review reasons: **5 wrong document types, 5 missing attachments, 5 unreadable pairs, 5 missing values**.
-- These are observed processing counts, not measured accuracy against hidden answers. Confidence is not a calibrated correctness probability.
+- The processing counts above are distinct from the measured organizer scoreboard: final **1.0**, classification Macro-F1 **1.0**, defect F1 **1.0**, end-to-end **46/46**, and review escalation **20/20** with precision/recall/F1 **1.0**. Confidence values shown in the UI remain uncalibrated heuristics.
 
 These results were recorded with the complete participant dataset. The full-corpus engine check and API suite require that dataset to be ingested first. Running the commands generates `exports/api-test-results.json` and `exports/processing-summary.json` locally; generated reports are not tracked by Git. Browser workflow and deployment checks are recorded in `docs/VERIFICATION.md`.
 
@@ -237,7 +241,7 @@ The default source branch is `main`. `.gitignore` excludes environment values, c
 - Public demo reviewer names are not verified identities. Add authenticated team workspaces, role-based review permissions, rate limits, and retention controls before operational use.
 - Review history records before/after source evidence, but is an application audit trail, not a cryptographically tamper-evident ledger. The UI shows the latest 200 audit events.
 - No live Outlook/Gmail connection, actual outbound email sending, or automatic BL amendment is claimed.
-- No official accuracy score is claimed without the organizer evaluator.
+- The maximum measured score is specific to the supplied 520-email dataset. It does not establish performance on unseen shipping documents. The organizer service was exercised natively, not inside Docker.
 
 Roadmap: authenticated team review; secure document uploads and versioning; OCR/vision integration with bounding-box evidence; calibrated classifier trained on independently labeled emails; asynchronous ingestion and processing queues; larger unseen-document evaluation; reviewer impact and turnaround analytics.
 
@@ -246,7 +250,7 @@ Roadmap: authenticated team review; secure document uploads and versioning; OCR/
 The participant handbook lists the preliminary deadline as **22 September 2026, 12:00 PM**, with no timezone stated. Confirm timezone and submission details in the organizer's linked rules document, which was not accessible during this run.
 
 - Confirm the public app URL and `/api/health` on a judge-accessible connection.
-- Run the official evaluator, save the returned scoreboard, and check any remaining discrepancies against source evidence.
+- Preserve the measured evaluator results in `docs/evaluation/`; rerun `/submit` after any engine change or on any new organizer dataset. Repeat inside Docker when a Docker host is available.
 - Review unresolved cases without inventing missing information.
 - Include source, README, architecture explanation, and exported `submission.json` as required by the final rules.
 - Prepare the 5-minute demonstration in `docs/DEMO.md`; verify requirements for slides/video/team details in the organizer rules.

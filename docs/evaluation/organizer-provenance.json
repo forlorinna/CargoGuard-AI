@@ -1,0 +1,21 @@
+{
+  "organizer_code_unmodified": true,
+  "sha256": {
+    "server/app.py": "853187f95b46787cabbf4a370f01ff551433a767fc6844ac2ed0b2ee5ccf6b97",
+    "server/scoring.py": "230b9a2f865b42f5996d462b49a658058a9c2859703b74326716d8308abe13a7",
+    "server/requirements.txt": "d04a0bdde346d5fd903b8142d6ae0171bf50d610fdb5a878a8be31cca46f70cc"
+  },
+  "distribution_sha256": "62c89020c78ab1313d49325b9b9cf3624efb46f3de72176555ecde3c2d7c6fa7",
+  "runtime": "native-python",
+  "python": "3.12.14",
+  "fastapi": "0.141.1",
+  "uvicorn": "0.53.0",
+  "docker_used": false,
+  "docker_blocker": "Docker executable/service absent; WSL not installed.",
+  "bind_host": "127.0.0.1",
+  "port": 8080,
+  "REVEAL_GT": "0",
+  "participant_inbox_matches_organizer": true,
+  "participant_attachments_match_organizer": 250,
+  "reference_data_handling": "Provisioned opaquely from the organizer distribution and consumed only inside the unmodified scoring service. No label contents, reference endpoints or generator source were inspected or used by CargoGuard."
+}

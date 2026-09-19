@@ -6,3 +6,5 @@
 *.pdf binary
 *.docx binary
 *.xlsx binary
+# Preserve scored-response bytes so the logged SHA-256 remains verifiable.
+docs/evaluation/*-score.json -text whitespace=cr-at-eol
