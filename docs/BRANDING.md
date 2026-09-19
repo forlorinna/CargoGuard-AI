@@ -11,6 +11,7 @@ Evidence-backed shipping document verification for the Averis × Monash Hackatho
 - The existing shield favicon now has an accessible CargoGuard name. There is no web manifest to rename.
 - README uses the final full title and tagline, clear live-demo links, portable setup instructions, and explicit naming/domain recommendations. Removed machine-specific development-workspace commands.
 - Package name was already `cargoguard`; added the final tagline as its description. Dependency versions and the lockfile are unchanged.
+- The hosting service's display title now uses the final full title, without changing its project ID, audience, or public URL.
 - Local deployment resource labels use `cargoguard-d1` and `cargoguard-r2`; the logical DB binding and database ID are unchanged. The local-only database ID is a deliberate Wrangler development value, replaced by the hosting service for production.
 - Removed the unused authentication helper, two unused D1 example files, three unreferenced starter SVGs, and an empty configuration placeholder comment. No application imports referenced these files.
 
@@ -29,3 +30,16 @@ All official evaluation response files, run records, provenance hashes, and prio
 Recommended GitHub repository name: **`cargoguard`**. The existing `forlorinna/CargoGuard-AI` remote remains connected so published source links continue to work; this pass does not rename the hosted repository.
 
 For the competition, use the verified [current public demo](https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site). A future provider-independent address should be `cargoguard` under a domain the team owns. No ownership or availability of a new domain is implied, and the working production URL is not sacrificed for cosmetic naming.
+
+## Final verification — 20 September 2026 (Asia/Shanghai)
+
+- TypeScript checking passed; all 15 engine tests passed; the production build succeeded. Local D1 migration checking reported no pending migrations.
+- All 14 API integration checks passed against the new public deployment, including durable review/audit writes, session isolation, reprocessing, and export.
+- Production smoke checks passed: homepage and all six frontend assets, healthy D1, 520 emails, all 250 original attachment hashes, and exact submission equivalence.
+- Browser checks covered Dashboard, Smart Inbox, Verification, Human Review, Reports, and Processing. All six rendered without application errors or unnecessary platform branding in visible text. Title, description, removed development marker, navigation subtitle, footer, and mobile-width layout were verified. The existing browser-download completion limitation remains recorded in the deployment history; export content is verified through the API.
+- All 11 `lib/*.ts` files still match the official baseline SHA-256 hashes. An additional before/after audit protected API routes, ingestion/processing/evaluation scripts, test source, existing evaluation and deployment records, and hosting configuration: all 31 protected files remained byte-identical.
+- The frozen submission SHA-256 remains `b0fac824010298e6bfa3b231c0490452916e50f47bc2df76df249321d659333c`. No new official evaluation was needed or claimed for this presentation-only release; the recorded 1.0/1.0 result and its runtime qualifications are unchanged.
+- The tracked-source audit found no common credential-pattern matches, real environment-value files, private evaluator files, official dataset archives, generated participant copies, dependency/build directories, or TODO/FIXME markers. This is a pattern-and-path audit, not a guarantee against every possible secret encoding.
+- All relative Markdown file links resolved. The live homepage, health endpoint, and current GitHub repository links returned HTTP 200. Localhost references are limited to clearly identified local instructions and historical evidence.
+
+Fresh records: [production smoke](deployment/branding-v3-smoke-results.json), [production API](deployment/branding-v3-api-results.json), and [release integrity](deployment/branding-v3-integrity.json). Earlier evidence files were not overwritten.

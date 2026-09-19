@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-09-19T17:45:18.905Z",
+  "base": "https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site",
+  "homepageStatus": 200,
+  "frontendAssetsChecked": 6,
+  "health": {
+    "status": "ok",
+    "engine": "local-intent-v1",
+    "emails": 520,
+    "storage": "D1",
+    "schema": 1
+  },
+  "emails": 520,
+  "originalAttachmentsVerified": 250,
+  "submissionMatchesFrozenBaseline": true,
+  "baselineSubmissionSha256": "b0fac824010298e6bfa3b231c0490452916e50f47bc2df76df249321d659333c",
+  "dataStorage": "Demo corpus is bundled in the Worker; D1 persists session review overrides and audit events."
+}

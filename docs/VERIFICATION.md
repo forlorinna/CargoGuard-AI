@@ -1,5 +1,7 @@
 # Verification record
 
+Branding release rechecked on **20 September 2026 (Asia/Shanghai)**: TypeScript, all 15 engine tests, production build, all 14 public API checks, and complete production smoke checks passed. All frozen engine hashes and the evaluated submission are unchanged. See [the branding audit](BRANDING.md) and [version 3 release integrity](deployment/branding-v3-integrity.json). The measured official score below remains the original organizer result; this cosmetic release does not claim a new evaluation run.
+
 Verified on 19 September 2026. The official organizer `/submit` endpoint now reports the measured results below; operational counts and automated tests are documented separately.
 
 The same frozen engine is now verified on the public Cloudflare deployment. Homepage, assets, health, all 520 cases, all 250 original attachment hashes, D1 review/audit persistence, and exact submission equivalence passed production checks. See [the deployment record](DEPLOYMENT.md) for browser workflow coverage and limitations.

@@ -14,6 +14,8 @@ The frozen-scoring build was published to Cloudflare Workers with D1 through Sit
 
 The product and package identifier are **CargoGuard** and `cargoguard`. The recommended repository name is `cargoguard`; the current source link remains valid until an intentional repository rename. The existing production domain remains the competition demo URL. A future owned custom domain may use a `cargoguard` subdomain; no domain purchase, DNS change, or URL migration is required for this release. See [branding and repository hygiene](docs/BRANDING.md) for the frozen-engine audit and retained hosting integration.
 
+The final branding release (version 3) passed TypeScript, 15 engine tests, 14 production API checks, and full production smoke checks on 20 September 2026 (Asia/Shanghai). All frozen engine hashes, the evaluated submission, and earlier evaluation/deployment records are unchanged.
+
 **Measured organizer-evaluator result (19 September 2026): final score 1.0 / 1.0 across all 520 participant emails.** End-to-end: 46/46; Stage-1 Macro-F1: 1.0; Stage-3 Defect-F1: 1.0; review escalation precision/recall/F1: 1.0. These are actual `/submit` responses from the unmodified organizer service, run natively with Python because Docker/WSL were unavailable. This is a result on the supplied dataset, not an unseen-data or production accuracy claim. See [the evaluation log](docs/EVALUATION.md) and [returned scoreboard](docs/evaluation/001-baseline-score.json).
 
 ## Product

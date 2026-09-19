@@ -1,5 +1,7 @@
 # Frozen-scoring production deployment
 
+**Current release: version 3**, the final competition branding pass, deployed successfully on 20 September 2026 (Asia/Shanghai). It preserves the public URL, D1 binding, complete demo data, and frozen evaluated engine. The new release passed all 14 API checks and full production smoke checks. Its [integrity record](deployment/branding-v3-integrity.json), [smoke results](deployment/branding-v3-smoke-results.json), and [API results](deployment/branding-v3-api-results.json) supplement the original version 2 evidence below without overwriting it. See [all branding changes and retention decisions](BRANDING.md).
+
 Public HTTPS application: https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site
 
 Health endpoint: https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site/api/health
