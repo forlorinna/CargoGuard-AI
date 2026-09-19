@@ -1,0 +1,126 @@
+{
+  "checkpointAt": "2026-09-19T18:12:43.923Z",
+  "sourceCommit": "b83ea1bbef88b139eadb3bd27db8bd40106859a1",
+  "frozenFiles": {
+    "lib/ai.ts": "9653d65d24bcbebf12f7ae0aaf0edaaf16de04b74c42782d621db4806a54565c",
+    "lib/classification.ts": "2f6fe147c78b2cc083055d7ab46b63351f7b8d339a9888ae105b879f184244d6",
+    "lib/comparison.ts": "4ac185a0686d511218b65368ea8c2d9b7cb422372d884e61cea9828a15e565fc",
+    "lib/extraction.ts": "bb91481a3651791b2a71ad31f02afc211022c43d9999c26e0d679e747fc97584",
+    "lib/normalization.ts": "c210c3cb7b0ef75c8808e821b0f1864f7daab1882ac2143767cb2df20d1ccbe8",
+    "lib/pipeline.ts": "6e34a409a678fe22b1b5e796c98d01704ceefd51323221f35823a458062ce708",
+    "lib/reporting.ts": "f3beabd579279cdeaf07f2fd6c84e5ff5961b65fffcebbdbe2780676ee6d0696",
+    "lib/review.ts": "ffe2937f7e3a07670c537a81b7282f97c8117e3ba257fe805c5393c93a428738",
+    "lib/store.ts": "379729261383f5114a7e7635c4863fe051c9df3a885d0f83ddfc7b114b612a61",
+    "lib/types.ts": "bd222eba77e547c9f24a0cfbf5a7308793eed649fe2da3de485bb0045da4e7e5",
+    "lib/utils.ts": "53f3d3d070f0a9082934da25b875f9499855c2b0693868dd28be8c23d8730f68",
+    "app/api/cases/route.ts": "8d33c7954d90746084404b5bdc7a555ae207814713290a5d74f7884de330e7a1",
+    "app/api/health/route.ts": "2af98bf1a2df6db745f6bdd376fc09ef54dabffc3719b0c575b9e1439937ecd7",
+    "app/api/process/route.ts": "90e652915126865c9b82b2b3482ba404c519d4b6e8826fdb97388ed632d6e9c2",
+    "app/api/retry/route.ts": "fb2ef66d6ed30e759919c1252e235ae37b5792b01c8c8ee9a6f687897f94fbc1",
+    "app/api/review/route.ts": "a8cb956b283d905fed89de79b4fb2f9857cb04d81d4af4fa6514ef0c9835772c",
+    "app/api/submission/route.ts": "73d275df4cef0673b7c4a7d97c5581fd1c627d0a61b5bbb23142fb225a112f6c",
+    "tests/engine.test.ts": "60695a36aa190fdda9fe99551b1979948e84636d9cd5752c3ff0170f5cb1d393",
+    "scripts/ingest.py": "72973988ef51263f552a647218ab87c190292b67e7b5bca975d98b2c83489322",
+    "scripts/process.mjs": "3b6663b6deb1e39c84b82d82d6fa2094075889bcbeecda75d0537c915c08969c",
+    "scripts/evaluate.py": "5bd3e2e282789b1dcb6845c7b559e062b7803978e292fa00ffa1dcc42636b0f4"
+  },
+  "submissionSha256": "b0fac824010298e6bfa3b231c0490452916e50f47bc2df76df249321d659333c",
+  "officialScore": {
+    "stage1": {
+      "accuracy": 1,
+      "macro_f1": 1,
+      "rule_pct": null,
+      "per": {
+        "BL_COMPARISON": {
+          "tp": 220,
+          "fp": 0,
+          "fn": 0
+        },
+        "SI_REQUEST": {
+          "tp": 125,
+          "fp": 0,
+          "fn": 0
+        },
+        "INVOICE_QUERY": {
+          "tp": 75,
+          "fp": 0,
+          "fn": 0
+        },
+        "GENERAL": {
+          "tp": 60,
+          "fp": 0,
+          "fn": 0
+        },
+        "SPAM": {
+          "tp": 40,
+          "fp": 0,
+          "fn": 0
+        }
+      },
+      "confusion": {
+        "BL_COMPARISON": {
+          "BL_COMPARISON": 220
+        },
+        "INVOICE_QUERY": {
+          "INVOICE_QUERY": 75
+        },
+        "SI_REQUEST": {
+          "SI_REQUEST": 125
+        },
+        "GENERAL": {
+          "GENERAL": 60
+        },
+        "SPAM": {
+          "SPAM": 40
+        }
+      }
+    },
+    "stage3": {
+      "defect_precision": 1,
+      "defect_recall": 1,
+      "defect_f1": 1,
+      "field_f1": 1,
+      "exact_match_rate": 1,
+      "doc_total": 200
+    },
+    "reliability": {
+      "escalation_recall": 1,
+      "escalation_precision": 1,
+      "escalation_f1": 1,
+      "gold_review": 20,
+      "pred_review": 20,
+      "per_reason": {
+        "wrong_doc_type": {
+          "total": 5,
+          "caught": 5
+        },
+        "missing_attachment": {
+          "total": 5,
+          "caught": 5
+        },
+        "unreadable": {
+          "total": 5,
+          "caught": 5
+        },
+        "missing_value": {
+          "total": 5,
+          "caught": 5
+        }
+      }
+    },
+    "end_to_end": {
+      "success": 46,
+      "total": 46,
+      "rate": 1
+    },
+    "weights": {
+      "stage1": 0.3,
+      "stage3": 0.2,
+      "end_to_end": 0.5
+    },
+    "final_score": 1,
+    "n_emails": 520
+  },
+  "officialRuntime": "native-python",
+  "note": "Checkpoint before isolated document-upload and learned OCR additions. Official dataset behavior remains frozen."
+}
