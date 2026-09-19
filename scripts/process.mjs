@@ -1,0 +1,17 @@
+import {build} from 'esbuild';
+import {mkdir,writeFile} from 'node:fs/promises';
+await mkdir('work',{recursive:true});
+await build({entryPoints:['lib/pipeline.ts','lib/reporting.ts'],bundle:true,platform:'node',format:'esm',outdir:'work/engine'});
+const {processCorpus}=await import('../work/engine/pipeline.js');
+const {submission,validateSubmission}=await import('../work/engine/reporting.js');
+const {readFile}=await import('node:fs/promises');
+const corpus=JSON.parse(await readFile('data/corpus.json','utf8'));
+const start=performance.now();const cases=processCorpus(corpus);const out=submission(cases);
+validateSubmission(out,corpus.emails.map(e=>e.email_id));
+await mkdir('exports',{recursive:true});
+await writeFile('exports/submission.json',JSON.stringify(out,null,2));
+await writeFile('exports/cases.json',JSON.stringify(cases,null,2));
+const counts=key=>Object.fromEntries([...new Set(cases.map(c=>c[key]))].map(v=>[v,cases.filter(c=>c[key]===v).length]));
+const summary={emails:cases.length,documents:Object.keys(corpus.documents).length,categories:counts('category'),statuses:counts('operationalStatus'),reviewReasons:counts('review_reason'),elapsedMs:Math.round(performance.now()-start),schemaValid:true,officialScore:null};
+await writeFile('exports/processing-summary.json',JSON.stringify(summary,null,2));
+console.log(JSON.stringify(summary,null,2));
