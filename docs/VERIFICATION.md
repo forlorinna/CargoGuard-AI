@@ -36,3 +36,17 @@ Verified on 19 September 2026. Counts below are observed behavior, not accuracy 
 - Public deployment status is supplied separately with the final delivery; a successful local build is not evidence of successful cloud publication.
 
 Before presenting, repeat the demo in `DEMO.md`, check the published app from a judge-accessible connection, and run the official evaluator when its service is available.
+
+## GitHub readiness recheck — 19 September 2026
+
+The current source was checked again before pushing to `forlorinna/CargoGuard-AI`:
+
+- All 15 engine tests passed with the locally imported official participant corpus.
+- TypeScript checking and a fresh production build passed.
+- Local D1 migration checking reported no outstanding migrations.
+- The built Worker ran successfully through standard Wrangler preview on port 5173; the earlier restricted-environment resolver issue did not recur.
+- All 14 API integration checks passed against that running production build, including durable review, audit history, reprocessing, export, and visitor isolation.
+- The frontend returned HTTP 200 and contained CargoGuard markup. All six referenced JavaScript/CSS assets returned HTTP 200, as did an original SI document. This was an HTTP smoke check, not a new browser-interaction test.
+- The source tree contains no tracked participant corpus, attachment copies, generated exports, dataset ZIPs, dependency folders, virtual environments, build output, or real environment-value files. `.env.example` contains empty values only. A scan for common credential patterns found no matches in the tracked source.
+
+The README covers the architecture, AI components, fresh-clone data import, setup, deployment, and official evaluation workflow. Local data and generated reports remain ignored. This recheck does not change the official-evaluation and external-provider limitations above.
