@@ -2,7 +2,26 @@ import assert from 'node:assert/strict';
 import {writeFile} from 'node:fs/promises';
 const base=process.env.TEST_URL||'http://localhost:5173';
 let cookie='';
-async function call(path,body,extra={}){const r=await fetch(base+path,{method:body?'POST':'GET',headers:{'Content-Type':'application/json',...(cookie?{Cookie:cookie}:{}),...extra},...(body?{body:JSON.stringify(body)}:{})});if(r.headers.get('set-cookie'))cookie=r.headers.get('set-cookie').split(';')[0];const txt=await r.text();let data;try{data=JSON.parse(txt);}catch{data={error:txt};}return {status:r.status,data};}
+async function call(path, body, extra = {}) {
+  const r = await fetch(base + path, {
+    method: body ? 'POST' : 'GET',
+    headers: {'Content-Type': 'application/json', ...(cookie ? {Cookie: cookie} : {}), ...extra},
+    ...(body ? {body: JSON.stringify(body)} : {}),
+  });
+  // Cloudflare can refresh its own cookie without resetting the app session.
+  // Preserve cookies by name, as a browser does, instead of replacing the jar.
+  const pairs = cookie.split('; ').filter(Boolean);
+  const jar = new Map(pairs.map(pair => [pair.slice(0, pair.indexOf('=')), pair]));
+  for (const header of r.headers.getSetCookie()) {
+    const pair = header.split(';')[0];
+    jar.set(pair.slice(0, pair.indexOf('=')), pair);
+  }
+  cookie = [...jar.values()].join('; ');
+  const txt = await r.text();
+  let data;
+  try { data = JSON.parse(txt); } catch { data = {error: txt}; }
+  return {status: r.status, data};
+}
 const checks=[];
 const record=(name)=>checks.push({name,passed:true});
 assert.equal((await call('/api/health')).status,200);record('API and D1 health');

@@ -16,7 +16,8 @@
     "process:dataset": "node scripts/process.mjs",
     "db:migrate": "node scripts/migrate-local.mjs",
     "typecheck": "tsc --noEmit",
-    "test:api": "node scripts/test-api.mjs"
+    "test:api": "node scripts/test-api.mjs",
+    "test:production": "node scripts/test-production.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

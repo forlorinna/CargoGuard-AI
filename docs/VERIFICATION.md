@@ -2,6 +2,8 @@
 
 Verified on 19 September 2026. The official organizer `/submit` endpoint now reports the measured results below; operational counts and automated tests are documented separately.
 
+The same frozen engine is now verified on the public Cloudflare deployment. Homepage, assets, health, all 520 cases, all 250 original attachment hashes, D1 review/audit persistence, and exact submission equivalence passed production checks. See [the deployment record](DEPLOYMENT.md) for browser workflow coverage and limitations.
+
 ## Measured official evaluator result
 
 | Returned metric | Result |

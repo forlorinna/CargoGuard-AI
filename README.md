@@ -6,6 +6,10 @@ CargoGuard is a full-stack operations workspace: classify a mixed inbox, identif
 
 **Live demo:** https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site
 
+**Public production health:** https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site/api/health
+
+The frozen-scoring build was published to Cloudflare Workers with D1 through Sites on 19 September 2026. Production checks verified all 520 emails, all 250 original attachment hashes, persistent review/audit writes, and an exported submission identical to the officially evaluated baseline. See [the production verification record](docs/DEPLOYMENT.md) for browser checks, deployment details, and the embedded-browser download limitation.
+
 **Source:** https://github.com/forlorinna/CargoGuard-AI
 
 **Measured organizer-evaluator result (19 September 2026): final score 1.0 / 1.0 across all 520 participant emails.** End-to-end: 46/46; Stage-1 Macro-F1: 1.0; Stage-3 Defect-F1: 1.0; review escalation precision/recall/F1: 1.0. These are actual `/submit` responses from the unmodified organizer service, run natively with Python because Docker/WSL were unavailable. This is a result on the supplied dataset, not an unseen-data or production accuracy claim. See [the evaluation log](docs/EVALUATION.md) and [returned scoreboard](docs/evaluation/001-baseline-score.json).
@@ -225,6 +229,10 @@ The project is registered with Sites in `.openai/hosting.json`; reuse its existi
 4. Package `dist/` with `dist/.openai/hosting.json` and `dist/.openai/drizzle/`. Save that exact revision and build as a Site version, then deploy it with public access as requested for the hackathon.
 5. Wait for the terminal deployment result. Use the returned URL for the frontend; append `/api/health` for the backend health endpoint.
 6. Configure optional AI secrets through Sites environment controls and redeploy if needed. The default local engine does not need them.
+
+Production currently uses no configured runtime secrets or external AI keys. The demo corpus is bundled with the Worker; D1 stores per-visitor review overrides and audit events, rather than a second copy of all inbox records. A fresh visitor gets the complete machine baseline; review changes remain scoped to that visitor's cookie. No private evaluator files or evaluator service are deployed.
+
+For read-only production checks, set `TEST_URL` to the public HTTPS URL and run `npm run test:production`. This checks the homepage, assets, D1 health, all attachment hashes, and exact baseline submission equivalence. `npm run test:api` additionally creates isolated test sessions and exercises real review/audit writes. Both require local participant data to have been ingested; keep generated reports in ignored `exports/`.
 
 Cloud infrastructure is meaningful: verification/review APIs execute server-side, D1 persists workflow state, and original synthetic evidence is served over HTTPS. It is not a static dashboard with fake backend results.
 
