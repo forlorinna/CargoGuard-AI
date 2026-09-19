@@ -1,5 +1,6 @@
 {
   "name": "cargoguard",
+  "description": "Evidence-backed shipping document verification for the Averis × Monash Hackathon 2026",
   "version": "0.1.0",
   "private": true,
   "engines": {

@@ -2,11 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CargoGuard · Shipping document intelligence",
-  description: "Evidence-backed shipping document verification, discrepancy detection, and human review.",
-  other: {
-    "codex-preview": "development",
-  },
+  title: "CargoGuard | Shipping Document Verification",
+  description: "Evidence-backed shipping document verification for the Averis × Monash Hackathon 2026",
+  applicationName: "CargoGuard",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

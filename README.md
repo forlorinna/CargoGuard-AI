@@ -1,16 +1,18 @@
-# CargoGuard
+# CargoGuard | Shipping Document Verification
 
 Evidence-backed shipping document verification for the Averis × Monash Hackathon 2026.
 
 CargoGuard is a full-stack operations workspace: classify a mixed inbox, identify a Shipping Instruction (SI) and draft Bill of Lading (BL), compare seven normalized fields, resolve exceptions with a reviewer, and export the official submission format. The deployed demonstration processes the complete **520-message synthetic participant dataset** and **250 attachments**. This GitHub repository contains the reusable source; official data, copied attachments, and generated exports are excluded and must be imported locally. The original supplied ZIPs and documents are unchanged. No private reference answers or dataset generator code are used.
 
-**Live demo:** https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site
+**Live demo:** [CargoGuard](https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site)
 
-**Public production health:** https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site/api/health
+**Public production health:** [API health](https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site/api/health)
 
 The frozen-scoring build was published to Cloudflare Workers with D1 through Sites on 19 September 2026. Production checks verified all 520 emails, all 250 original attachment hashes, persistent review/audit writes, and an exported submission identical to the officially evaluated baseline. See [the production verification record](docs/DEPLOYMENT.md) for browser checks, deployment details, and the embedded-browser download limitation.
 
-**Source:** https://github.com/forlorinna/CargoGuard-AI
+**Source:** [GitHub repository](https://github.com/forlorinna/CargoGuard-AI)
+
+The product and package identifier are **CargoGuard** and `cargoguard`. The recommended repository name is `cargoguard`; the current source link remains valid until an intentional repository rename. The existing production domain remains the competition demo URL. A future owned custom domain may use a `cargoguard` subdomain; no domain purchase, DNS change, or URL migration is required for this release. See [branding and repository hygiene](docs/BRANDING.md) for the frozen-engine audit and retained hosting integration.
 
 **Measured organizer-evaluator result (19 September 2026): final score 1.0 / 1.0 across all 520 participant emails.** End-to-end: 46/46; Stage-1 Macro-F1: 1.0; Stage-3 Defect-F1: 1.0; review escalation precision/recall/F1: 1.0. These are actual `/submit` responses from the unmodified organizer service, run natively with Python because Docker/WSL were unavailable. This is a result on the supplied dataset, not an unseen-data or production accuracy claim. See [the evaluation log](docs/EVALUATION.md) and [returned scoreboard](docs/evaluation/001-baseline-score.json).
 
@@ -118,15 +120,6 @@ For a built Worker preview:
 npm start -- --port 8787
 ```
 
-To use this particular Windows workspace without changing your global Node installation:
-
-```powershell
-$env:PATH = (Resolve-Path '../../work').Path + ';' + $env:PATH
-& ../../work/node.exe 'C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js' run dev
-```
-
-The portable x64 Node executable in `../../work` is a local tooling aid, not part of the source ZIP. On other machines use a standard compatible Node installation.
-
 ## Environment variables
 
 Copy `.env.example` to `.env` only when configuring integrations. The default needs no secrets. Keep both files' variable names aligned and never commit `.env`.
@@ -225,7 +218,7 @@ The project is registered with Sites in `.openai/hosting.json`; reuse its existi
 
 1. Import the participant data locally, then run tests, typecheck, and `npm run build`.
 2. Keep `.openai/hosting.json`, source, lockfile, and migrations in the repository. Exclude `.env`, `.dev.vars`, `.wrangler`, `work`, and `node_modules`.
-3. In Codex with Sites connected, request publication of this existing project. Commit and push the exact source revision to its configured Sites repository.
+3. Through the authenticated Sites integration, publish this existing project. Commit and push the exact source revision to its configured Sites repository.
 4. Package `dist/` with `dist/.openai/hosting.json` and `dist/.openai/drizzle/`. Save that exact revision and build as a Site version, then deploy it with public access as requested for the hackathon.
 5. Wait for the terminal deployment result. Use the returned URL for the frontend; append `/api/health` for the backend health endpoint.
 6. Configure optional AI secrets through Sites environment controls and redeploy if needed. The default local engine does not need them.
