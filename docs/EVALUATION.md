@@ -1,5 +1,9 @@
 # Official evaluation log
 
+**Final engineering regression, 20 September 2026:** a third real scoring submission, run 005, again returned **1.0 / 1.0** for the complete 520-email dataset after adding the isolated upload/OCR workflow. End-to-end 46/46; Stage-1 Macro-F1 1.0; Stage-3 Defect-F1 1.0; review precision/recall/F1 1.0 with 20/20 escalations. All returned aggregate metrics match the original baseline. [Exact response](evaluation/005-engineering-score.json), [run metadata](evaluation/005-engineering-run.json), [before-change checkpoint](evaluation/004-engineering-checkpoint.json), and [frozen-file comparison](evaluation/005-frozen-integrity.json) are retained. All 21 checkpointed core/API/test/ingestion files and the submission remain byte-identical. No rollback or score tuning was needed. Docker was unavailable on recheck; the same unmodified organizer service ran natively with private labels confined to its process. This is an evaluator result, not a hackathon judging score.
+
+The original two-run history below is preserved.
+
 Two real submissions were made on 19 September 2026 to the organizer's `POST http://localhost:8080/submit`. Both used the complete 520-email participant dataset, freshly ingested from its public bundle. No user-review overrides were included.
 
 | Run | Change before submission | E2E | Stage-1 Macro-F1 | Stage-3 Defect-F1 | Review P/R/F1 | Final |

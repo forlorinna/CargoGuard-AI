@@ -96,7 +96,7 @@ Uploaded-pair confirmation requires an explicit check against originals, a revie
 | PNG / JPEG | Browser decoding followed by English OCR | Printed English; handwriting and multilingual recognition not claimed |
 | TXT / XLSX | TXT in CLI and upload; XLSX in participant CLI | XLSX browser upload is not implemented |
 
-Upload limits: **8 MB/file**, **10 PDF pages**, **4 OCR pages/document**, **16-megapixel images**, **80,000 extracted characters/document**, **240 KB API payload**, and **10 saved pairs/session**. Word archive expansion is bounded. Failed or partial extraction never silently becomes a verified result. Replacing originals requires a fresh extraction; Retry rechecks saved text.
+Upload limits: **8 MB/file**, **10 PDF pages**, **4 OCR pages/document**, **16-megapixel images**, **80,000 extracted characters/document**, **240 KB API payload**, and **10 saved pairs/session**. Word archive metadata is checked before parsing. Failed or partial extraction never silently becomes a verified result. Replacing originals requires a fresh extraction; Retry rechecks saved text.
 
 The small examples in `public/demo/` are original synthetic fixtures, not copied organizer data. Their scan has no text layer. See [support and test details](docs/AI-AND-DOCUMENTS.md).
 
@@ -117,9 +117,13 @@ Weights: 50% end-to-end, 30% classification Macro-F1, 20% defect F1. Stage-3 cou
 
 These are real organizer `/submit` responses. Docker is unavailable here, so the **unmodified organizer service ran natively in Python**, with private references consumed only inside the organizer process. No reference labels, judge endpoint, or generator code were inspected. Docker-container validation remains unperformed.
 
+The final engineering regression on **20 September 2026** returned the same metrics after the isolated upload/OCR additions. [Fresh returned score](docs/evaluation/005-engineering-score.json) and [run metadata](docs/evaluation/005-engineering-run.json) record the result. All 21 checkpointed files and the complete submission stayed byte-identical.
+
 [Evaluation history and actual score files](docs/EVALUATION.md) · [Verification record](docs/VERIFICATION.md) · [Production deployment evidence](docs/DEPLOYMENT.md)
 
 **Organizer results, local tests, and production checks are separate evidence categories.** Unit tests do not establish the official score; production smoke checks establish deployment behavior, not unseen-document accuracy.
+
+**Local validation:** TypeScript, production build, 15 frozen-engine tests, and 6 document safety tests passed. **Production validation:** 14 existing API checks, 11 document API checks, all 250 participant attachment hashes, and 16 parser/model/demo asset hashes passed. Real browser tests verified PDF, Word, scanned-PDF/PNG OCR, human correction, reload persistence, and all seven views. See [release evidence](docs/deployment/engineering-v4-integrity.json).
 
 ## Local setup
 

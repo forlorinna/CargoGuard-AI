@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-09-20T05:34:46.585Z",
+  "base": "https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site",
+  "passed": 16,
+  "allAssetHashesMatched": true,
+  "assets": [
+    "/runtime/pdf.worker.min.mjs",
+    "/runtime/ocr-worker.min.js",
+    "/runtime/eng.traineddata.gz",
+    "/runtime/PDFJS-LICENSE",
+    "/runtime/TESSERACT-LICENSE",
+    "/runtime/TESSERACT-CORE-LICENSE",
+    "/runtime/tesseract-core-lstm.wasm.js",
+    "/runtime/tesseract-core-relaxedsimd-lstm.wasm.js",
+    "/runtime/tesseract-core-relaxedsimd.wasm.js",
+    "/runtime/tesseract-core-simd-lstm.wasm.js",
+    "/runtime/tesseract-core-simd.wasm.js",
+    "/runtime/tesseract-core.wasm.js",
+    "/demo/BL-table.docx",
+    "/demo/SI-scan.pdf",
+    "/demo/SI-scan.png",
+    "/demo/SI-text.pdf"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "checkedAt": "2026-09-20T05:41:11.286Z",
+  "siteVersion": 4,
+  "versionId": "appgprj_6aad63adc6d88191883ce49326d38a93~appgver_219c4d99061881918416b3e24cc2a8ba",
+  "deploymentId": "appgdep_6aaf6fe17d4c81919195fee3f8ee81f2",
+  "deploymentStatus": "succeeded",
+  "url": "https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site",
+  "deployedSource": "ab93a9b9a0ed675043ad3df10e8946cb928140c1",
+  "githubImplementationCommit": "41a9cb36ff4369764d785e57326baf421dcd76a9",
+  "sourceTree": "d6de56c7e7e5d2975fa96d30111a2d89d654b5de",
+  "freeze": {
+    "checkedAt": "2026-09-20T05:40:32.259Z",
+    "frozenFilesChecked": 21,
+    "allByteIdentical": true,
+    "submissionSha256": "b0fac824010298e6bfa3b231c0490452916e50f47bc2df76df249321d659333c"
+  },
+  "typeScript": "passed",
+  "productionBuild": "passed",
+  "engineTestsPassed": 15,
+  "documentSafetyTestsPassed": 6,
+  "productionApiChecksPassed": 14,
+  "productionDocumentApiChecksPassed": 11,
+  "productionAssetHashesVerified": 16,
+  "productionParticipantAttachmentsVerified": 250,
+  "officialEvaluation": {
+    "record": "../evaluation/005-engineering-run.json",
+    "finalScore": 1,
+    "emails": 520,
+    "runtime": "native-python",
+    "dockerAvailable": false
+  },
+  "browser": {
+    "textPdf": true,
+    "docxTable": true,
+    "imageOnlyPdfOCR": true,
+    "pngFilePickerOCR": true,
+    "pdfOcrSignal": 95,
+    "pngOcrSignal": 93,
+    "ocrRequiresHumanReview": true,
+    "unitEquivalentCorrectionAndAuditPersistedAfterReload": true,
+    "sevenViewsRendered": true,
+    "downloadCompletionVerified": false
+  },
+  "productionExternalModelCredentialsConfigured": false,
+  "originalUploadBytesStored": false
+}

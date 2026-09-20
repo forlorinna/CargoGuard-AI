@@ -1,6 +1,24 @@
 # Frozen-scoring production deployment
 
-**Current release: version 3**, the final competition branding pass, deployed successfully on 20 September 2026 (Asia/Shanghai). It preserves the public URL, D1 binding, complete demo data, and frozen evaluated engine. The new release passed all 14 API checks and full production smoke checks. Its [integrity record](deployment/branding-v3-integrity.json), [smoke results](deployment/branding-v3-smoke-results.json), and [API results](deployment/branding-v3-api-results.json) supplement the original version 2 evidence below without overwriting it. See [all branding changes and retention decisions](BRANDING.md).
+## Current release — version 4, final engineering pass
+
+Published successfully on **20 September 2026** to the same public HTTPS URL. Cloudflare Workers, assets, D1, the `DB` binding, and the existing schema remain in use; no R2, external AI credentials, or new cloud service was added. Original uploaded binaries stay on the browser device. D1 additionally stores session-scoped `upload_` case evidence and review/audit events, through the existing schema. Uploaded pairs never enter official inbox exports.
+
+- Saved version: `appgprj_6aad63adc6d88191883ce49326d38a93~appgver_219c4d99061881918416b3e24cc2a8ba`
+- Deployment: `appgdep_6aaf6fe17d4c81919195fee3f8ee81f2`; status: `succeeded`.
+- Deployed source: `ab93a9b9a0ed675043ad3df10e8946cb928140c1`; source tree: `d6de56c7e7e5d2975fa96d30111a2d89d654b5de`, matching GitHub implementation commit `41a9cb3`.
+- Full production smoke checks passed: homepage, seven frontend assets, D1 health, 520 cases, 250 original attachment hashes, and exact frozen submission equivalence.
+- All 14 existing API checks and all 11 new document API checks passed on public production. Sixteen parser/model/license/demo assets were fetched and SHA-256 verified.
+- Production browser tests exercised text-PDF and Word-table parsing, real OCR on the image-only PDF (95/100 recognition signal), and a PNG selected through the actual file picker (93/100). Both OCR cases stayed review-required; all seven fields and the actual consignee difference were visible.
+- A source-backed human correction represented 24000 kg as equivalent 24 MT. The frozen normalizer matched the weight, retained the real consignee discrepancy, and saved the review/audit entry across a full reload. Retry was disabled for finalized human work.
+- All seven application views rendered without application errors. The upload UI was checked at the embedded browser's mobile-width viewport; its comparison table scrolls within its panel.
+- The separate uploaded report export control was clicked, but the embedded browser again emitted no download-completion event. Download completion is **not claimed as verified**. Persisted report case/evidence data and audit behavior were independently validated through the API.
+
+Fresh records: [smoke](deployment/engineering-v4-smoke.json), [existing APIs](deployment/engineering-v4-api.json), [document APIs](deployment/engineering-v4-documents-api.json), [asset hashes](deployment/engineering-v4-assets.json), and [release integrity](deployment/engineering-v4-integrity.json). The [fresh organizer evaluation](evaluation/005-engineering-score.json) independently returned **1.0 / 1.0**. Prior deployment records below are historical and have not been overwritten.
+
+## Previous releases
+
+**Previous release: version 3**, the final competition branding pass, deployed successfully on 20 September 2026 (Asia/Shanghai). It preserves the public URL, D1 binding, complete demo data, and frozen evaluated engine. The new release passed all 14 API checks and full production smoke checks. Its [integrity record](deployment/branding-v3-integrity.json), [smoke results](deployment/branding-v3-smoke-results.json), and [API results](deployment/branding-v3-api-results.json) supplement the original version 2 evidence below without overwriting it. See [all branding changes and retention decisions](BRANDING.md).
 
 Public HTTPS application: https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site
 

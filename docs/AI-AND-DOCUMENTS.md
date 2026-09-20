@@ -36,7 +36,7 @@ Uploaded cases have their own workspace and report. They never enter the officia
 ## Limits and fail-safe behavior
 
 - 8 MB per file; PDF up to 10 pages and 4 OCR pages; images up to 16 megapixels, rendered at no more than 6 megapixels for OCR.
-- Word archive expansion is bounded before parsing (500 entries, 16 MB expanded data). Encrypted/invalid archives are rejected. Legacy `.doc` is not supported.
+- Word archive metadata is checked before parsing (500 entries, at most 16 MB declared expanded data). Encrypted/invalid archives are rejected. This metadata check is not an antivirus scanner or a guarantee against deliberately forged archive headers. Legacy `.doc` is not supported.
 - At most 80,000 text characters per document and a 240 KB API request. OCR initialization and recognition have timeouts; text-layer PDF loading has a timeout.
 - Printed English is the supported OCR scope. Handwriting, multilingual scans, complex multi-column layouts, rotated/low-resolution images, and damaged files can fail or misread. No claim of general document-understanding accuracy is made.
 - OCR and parser warnings force review. A failed or incomplete parse drops partial text and cannot report an automatic verified match. Missing evidence cannot be filled by a language model.

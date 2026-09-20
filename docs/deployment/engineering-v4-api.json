@@ -1,0 +1,63 @@
+{
+  "base": "https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site",
+  "checks": [
+    {
+      "name": "API and D1 health",
+      "passed": true
+    },
+    {
+      "name": "Full inbox and session initialization",
+      "passed": true
+    },
+    {
+      "name": "Reject result into review and audit",
+      "passed": true
+    },
+    {
+      "name": "Incomplete confirmation rejected",
+      "passed": true
+    },
+    {
+      "name": "Stale revision blocked",
+      "passed": true
+    },
+    {
+      "name": "Finalization recomputes report",
+      "passed": true
+    },
+    {
+      "name": "Review and audit persist across reload",
+      "passed": true
+    },
+    {
+      "name": "Retry cannot overwrite finalized review",
+      "passed": true
+    },
+    {
+      "name": "Cross-origin mutation blocked",
+      "passed": true
+    },
+    {
+      "name": "Full reprocessing preserves human work",
+      "passed": true
+    },
+    {
+      "name": "API submission exact schema",
+      "passed": true
+    },
+    {
+      "name": "New visitor has isolated persistent workspace",
+      "passed": true
+    },
+    {
+      "name": "Missing originals prevent finalization",
+      "passed": true
+    },
+    {
+      "name": "Unresolved case retry succeeds and remains visible",
+      "passed": true
+    }
+  ],
+  "passed": 14,
+  "failed": 0
+}

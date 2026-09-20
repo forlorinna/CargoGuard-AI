@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile,readdir} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+const base=process.env.TEST_URL;
+assert(base&&new URL(base).protocol==='https:','Set TEST_URL to the public HTTPS app.');
+const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
+const manifest=JSON.parse(await readFile('public/runtime/manifest.json','utf8'));
+const assets=Object.entries(manifest).map(([name,entry])=>({path:'/runtime/'+name,sha256:entry.sha256}));
+for(const name of await readdir('public/demo'))if(/\.(pdf|docx|png)$/.test(name))assets.push({path:'/demo/'+name,sha256:hash(await readFile('public/demo/'+name))});
+let next=0;
+await Promise.all(Array.from({length:4},async()=>{while(next<assets.length){const a=assets[next++],r=await fetch(base+a.path);assert.equal(r.status,200,a.path);assert.equal(hash(Buffer.from(await r.arrayBuffer())),a.sha256,a.path);}}));
+const report={checkedAt:new Date().toISOString(),base,passed:assets.length,allAssetHashesMatched:true,assets:assets.map(a=>a.path)};
+await writeFile('exports/document-assets-results.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));

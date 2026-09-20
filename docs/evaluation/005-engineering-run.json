@@ -1,0 +1,33 @@
+{
+  "run_id": "20260920T053015.430713Z",
+  "started_at": "2026-09-20T05:30:15.431722+00:00",
+  "endpoint": "http://127.0.0.1:8080/submit",
+  "runtime": "native-python",
+  "change_note": "Final engineering regression: isolated document upload and learned English OCR added; all 21 frozen checkpoint files and original 520-email submission bytes unchanged.",
+  "source_commit": "41a9cb36ff4369764d785e57326baf421dcd76a9",
+  "working_tree_dirty": false,
+  "engine_sha256": {
+    "ai.ts": "9653d65d24bcbebf12f7ae0aaf0edaaf16de04b74c42782d621db4806a54565c",
+    "classification.ts": "2f6fe147c78b2cc083055d7ab46b63351f7b8d339a9888ae105b879f184244d6",
+    "comparison.ts": "4ac185a0686d511218b65368ea8c2d9b7cb422372d884e61cea9828a15e565fc",
+    "extraction.ts": "bb91481a3651791b2a71ad31f02afc211022c43d9999c26e0d679e747fc97584",
+    "normalization.ts": "c210c3cb7b0ef75c8808e821b0f1864f7daab1882ac2143767cb2df20d1ccbe8",
+    "pipeline.ts": "6e34a409a678fe22b1b5e796c98d01704ceefd51323221f35823a458062ce708",
+    "reporting.ts": "f3beabd579279cdeaf07f2fd6c84e5ff5961b65fffcebbdbe2780676ee6d0696",
+    "review.ts": "ffe2937f7e3a07670c537a81b7282f97c8117e3ba257fe805c5393c93a428738",
+    "store.ts": "379729261383f5114a7e7635c4863fe051c9df3a885d0f83ddfc7b114b612a61",
+    "types.ts": "bd222eba77e547c9f24a0cfbf5a7308793eed649fe2da3de485bb0045da4e7e5",
+    "utils.ts": "53f3d3d070f0a9082934da25b875f9499855c2b0693868dd28be8c23d8730f68"
+  },
+  "status": "succeeded",
+  "submission_sha256": "b0fac824010298e6bfa3b231c0490452916e50f47bc2df76df249321d659333c",
+  "email_count": 520,
+  "health": {
+    "status": "ok",
+    "emails": 520,
+    "scoring_available": true
+  },
+  "complete_inbox_verified": true,
+  "score_sha256": "52ec883ba65d218163996c488ec97083180d2ac80655e12f2202906e2cbb6775",
+  "finished_at": "2026-09-20T05:30:20.088979+00:00"
+}

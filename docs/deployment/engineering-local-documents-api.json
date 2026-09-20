@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-09-20T05:28:23.343Z",
+  "base": "http://localhost:5173",
+  "passed": 11,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Document workspace and session initialization",
+      "passed": true
+    },
+    {
+      "name": "OCR cannot automatically finalize or assert defects",
+      "passed": true
+    },
+    {
+      "name": "Source attestation required",
+      "passed": true
+    },
+    {
+      "name": "Incomplete values cannot finalize",
+      "passed": true
+    },
+    {
+      "name": "Human confirmation reuses frozen normalization and review",
+      "passed": true
+    },
+    {
+      "name": "Stale revisions rejected",
+      "passed": true
+    },
+    {
+      "name": "Retry preserves finalized human work",
+      "passed": true
+    },
+    {
+      "name": "Document evidence and audit persist in D1",
+      "passed": true
+    },
+    {
+      "name": "Cross-origin, pair count, and body size guards",
+      "passed": true
+    },
+    {
+      "name": "Official 520-email export remains unchanged after upload/review",
+      "passed": true
+    },
+    {
+      "name": "Upload cases are isolated by visitor session",
+      "passed": true
+    }
+  ]
+}
