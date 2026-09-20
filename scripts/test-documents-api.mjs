@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import {writeFile,mkdir} from 'node:fs/promises';
+const base=process.env.TEST_URL||'http://localhost:5173';
+const jar=new Map(),checks=[];
+async function call(path,body,origin=base){const r=await fetch(base+path,{method:body?'POST':'GET',headers:{...(body?{'Content-Type':'application/json',Origin:origin}:{}),Cookie:[...jar].map(([k,v])=>k+'='+v).join('; ')},...(body?{body:JSON.stringify(body)}:{})});for(const line of r.headers.getSetCookie()){const pair=line.split(';')[0],at=pair.indexOf('=');jar.set(pair.slice(0,at),pair.slice(at+1));}const text=await r.text();let data;try{data=JSON.parse(text)}catch{data={error:text}}return {status:r.status,data};}
+const passed=name=>checks.push({name,passed:true});
+const frozen=(await call('/api/submission')).data;
+assert.equal((await call('/api/documents')).status,200);passed('Document workspace and session initialization');
+const text='Shipper: NORTHSTAR PAPER LTD\nConsignee: HARBOR BOOKS LTD\nNotify Party: HARBOR BOOKS LTD\nPort of Loading: PORT KLANG\nPort of Discharge: SINGAPORE\nContainer Count: 2\nGross Weight: 24000 kg';
+const documents=['SHIPPING INSTRUCTION','DRAFT BILL OF LADING'].map((h,i)=>({name:i?'bl.txt':'si.txt',format:'TXT',method:i?'text':'ocr',segments:[{location:'Page 1',text:h+'\n'+text}],sha256:'a'.repeat(64),ocrConfidence:i?null:96,warning:null}));
+const created=await call('/api/documents',{action:'compare',documents});assert.equal(created.status,200);let current=created.data.cases.find(c=>c.email.email_id===created.data.selectedId);assert.equal(current.status,'NEEDS_REVIEW');assert.equal(current.has_defect,false);passed('OCR cannot automatically finalize or assert defects');
+const values=Object.fromEntries(current.comparisons.map(c=>[c.field,{si:c.si.raw,bl:c.bl.raw}]));
+const review={action:'review',id:current.email.email_id,revision:current.revision,decision:'confirm',reviewer:'Document API test',note:'All seven values inspected against synthetic source evidence.',values};
+assert.equal((await call('/api/documents',review)).status,400);passed('Source attestation required');
+assert.equal((await call('/api/documents',{...review,sourceConfirmed:true,values:{...values,container_count:{si:'',bl:'2'}}})).status,400);passed('Incomplete values cannot finalize');
+const finalized=await call('/api/documents',{...review,sourceConfirmed:true});assert.equal(finalized.status,200);current=finalized.data.cases.find(c=>c.email.email_id===review.id);assert.equal(current.reviewed,true);assert.equal(current.status,'OK');passed('Human confirmation reuses frozen normalization and review');
+assert.equal((await call('/api/documents',{...review,sourceConfirmed:true})).status,400);passed('Stale revisions rejected');
+assert.equal((await call('/api/documents',{action:'retry',id:review.id,revision:current.revision})).status,400);passed('Retry preserves finalized human work');
+const persisted=await call('/api/documents');assert(persisted.data.cases.some(c=>c.email.email_id===review.id&&c.reviewed));assert(persisted.data.audit.some(a=>a.action==='Uploaded pair finalized'));passed('Document evidence and audit persist in D1');
+assert([400,403].includes((await call('/api/documents',{action:'compare',documents},'https://untrusted.example')).status));assert.equal((await call('/api/documents',{action:'compare',documents:[...documents,...documents]})).status,400);assert.equal((await call('/api/documents',{action:'compare',padding:'x'.repeat(240001)})).status,400);passed('Cross-origin, pair count, and body size guards');
+assert.deepEqual((await call('/api/submission')).data,frozen);passed('Official 520-email export remains unchanged after upload/review');
+jar.clear();assert.equal((await call('/api/documents')).data.cases.length,0);assert.equal((await call('/api/documents',{...review,sourceConfirmed:true})).status,400);passed('Upload cases are isolated by visitor session');
+await mkdir('exports',{recursive:true});const report={checkedAt:new Date().toISOString(),base,passed:checks.length,failed:0,checks};await writeFile('exports/documents-api-results.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));

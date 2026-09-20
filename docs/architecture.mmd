@@ -1,0 +1,21 @@
+flowchart TD
+  E[Official participant email + document input] --> P[Python CLI parsing: PDF / Word / TXT / XLSX]
+  P --> C[Cloudflare Worker: frozen lexical intent classification + rules]
+  U[Browser: uploaded SI + BL] --> X[PDF.js / Mammoth / text parsing]
+  X -->|scan or image| O[Learned AI: English LSTM OCR in browser worker]
+  X -->|text layer| A[Bounded extracted text + locations + method + file hash]
+  O -->|always review-required| A
+  A --> API[Cloudflare Worker: isolated document API]
+  API --> D[Deterministic SI / BL detection]
+  C --> D
+  D --> F[Frozen field extraction + source evidence + reliability gates]
+  F --> N[Frozen conservative normalization]
+  N --> V[Deterministic seven-field SI versus BL verification]
+  V -->|sufficient evidence; match| OK[Verified]
+  V -->|uncertain or discrepancy| H[Human review / correction / retry]
+  H --> R[Final report + preserved source evidence]
+  OK --> R
+  H <-->|session-scoped review state| DB[(Cloudflare D1: reviews + audit)]
+  R --> DB
+  R --> S[Official inbox submission OR separate uploaded-pair report]
+  C -. unconfigured optional LLM; uncertain retry only .-> L[Evidence-validated category suggestion]

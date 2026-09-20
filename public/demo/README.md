@@ -1,0 +1,1 @@
+Original synthetic demonstration documents created for CargoGuard. No organizer records or private answers. SI-text.pdf has a text layer; SI-scan.pdf contains only a raster image; SI-scan.png is the same scan; BL-table.docx holds labeled table cells and one deliberate consignee difference.

@@ -1,5 +1,11 @@
 # Five-minute CargoGuard demonstration
 
+For the final engineering release, use this sequence: 45 seconds on Dashboard/Smart Inbox and routing evidence; 60 seconds on an existing discrepancy and its seven-field source comparison; 45 seconds on review/correction/audit; 90 seconds on **Upload documents → Try PDF + Word example → Try scanned PDF example**, showing real OCR and mandatory human review; 30 seconds on the frozen organizer score and its separate test evidence; 30 seconds on reports and limitations. The dashboard's **Open a discrepancy** chooses a real discrepant case without an ID-specific engine rule.
+
+Explain that uploaded OCR is an active learned model; the official inbox classifier is a lexical ensemble, not an active LLM. Never describe the 1.0/1.0 evaluator result as the hackathon judging score. The scanned example is a raster-only PDF; allow time for its model to load. Keep a text-PDF/Word example available if the judge's device cannot run OCR. Saved original-file bytes are not hosted; retain the originals during review. Uploaded reports remain separate from the official submission.
+
+The original inbox walkthrough below remains available as a fallback and exercises the unchanged evaluated core.
+
 Use the official synthetic dataset and a fresh browser session. Do not invent values for a source that is genuinely missing.
 
 | Time | Action | Point to explain |
