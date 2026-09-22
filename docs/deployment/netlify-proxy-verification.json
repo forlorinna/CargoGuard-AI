@@ -1,0 +1,285 @@
+{
+  "checkedAt": "2026-09-22T02:43:39.267Z",
+  "url": "https://cargoguard-shipping.netlify.app",
+  "upstream": "https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site",
+  "siteId": "7855bdaf-7663-464c-b00d-cf9aa0433a69",
+  "deploymentId": "6ab1e9ca9dc50f0008a51606",
+  "deployedCommit": "606e6ea42872fdeac631a7096c9e0fc7337a23a1",
+  "deploymentStatus": "published",
+  "deploymentSeconds": 9,
+  "nextRuntimeRemovedInDashboard": true,
+  "manualPluginRemovalRequired": false,
+  "netlifyCLIAvailable": false,
+  "validationMode": "Actual hosted Netlify build plus isolated local build and TOML parsing",
+  "local": {
+    "tomlValid": true,
+    "isolatedBuildWithoutCorpus": true,
+    "isolatedBuildWithoutApplicationDependencies": true,
+    "staticMarkerBytes": 37,
+    "typeScript": "passed",
+    "proxySecurityTestsPassed": 6,
+    "engineTestsPassed": 15,
+    "documentSafetyTestsPassed": 6
+  },
+  "cloudflareRedeployed": false,
+  "applicationFilesChanged": false,
+  "participantDataAddedToGit": false,
+  "freeze": {
+    "checkedAt": "2026-09-22T02:43:39.073Z",
+    "frozenFilesChecked": 21,
+    "allByteIdentical": true,
+    "submissionSha256": "b0fac824010298e6bfa3b231c0490452916e50f47bc2df76df249321d659333c"
+  },
+  "production": {
+    "checkedAt": "2026-09-22T02:37:36.696Z",
+    "base": "https://cargoguard-shipping.netlify.app",
+    "homepageStatus": 200,
+    "frontendAssetsChecked": 7,
+    "health": {
+      "status": "ok",
+      "engine": "local-intent-v1",
+      "emails": 520,
+      "storage": "D1",
+      "schema": 1
+    },
+    "emails": 520,
+    "originalAttachmentsVerified": 250,
+    "submissionMatchesFrozenBaseline": true,
+    "baselineSubmissionSha256": "b0fac824010298e6bfa3b231c0490452916e50f47bc2df76df249321d659333c",
+    "dataStorage": "Demo corpus is bundled in the Worker; D1 persists session review overrides and audit events."
+  },
+  "assets": {
+    "checkedAt": "2026-09-22T02:37:26.052Z",
+    "base": "https://cargoguard-shipping.netlify.app",
+    "passed": 16,
+    "allAssetHashesMatched": true,
+    "assets": [
+      "/runtime/pdf.worker.min.mjs",
+      "/runtime/ocr-worker.min.js",
+      "/runtime/eng.traineddata.gz",
+      "/runtime/PDFJS-LICENSE",
+      "/runtime/TESSERACT-LICENSE",
+      "/runtime/TESSERACT-CORE-LICENSE",
+      "/runtime/tesseract-core-lstm.wasm.js",
+      "/runtime/tesseract-core-relaxedsimd-lstm.wasm.js",
+      "/runtime/tesseract-core-relaxedsimd.wasm.js",
+      "/runtime/tesseract-core-simd-lstm.wasm.js",
+      "/runtime/tesseract-core-simd.wasm.js",
+      "/runtime/tesseract-core.wasm.js",
+      "/demo/BL-table.docx",
+      "/demo/SI-scan.pdf",
+      "/demo/SI-scan.png",
+      "/demo/SI-text.pdf"
+    ]
+  },
+  "api": {
+    "base": "https://cargoguard-shipping.netlify.app",
+    "checks": [
+      {
+        "name": "API and D1 health",
+        "passed": true
+      },
+      {
+        "name": "Full inbox and session initialization",
+        "passed": true
+      },
+      {
+        "name": "Reject result into review and audit",
+        "passed": true
+      },
+      {
+        "name": "Incomplete confirmation rejected",
+        "passed": true
+      },
+      {
+        "name": "Stale revision blocked",
+        "passed": true
+      },
+      {
+        "name": "Finalization recomputes report",
+        "passed": true
+      },
+      {
+        "name": "Review and audit persist across reload",
+        "passed": true
+      },
+      {
+        "name": "Retry cannot overwrite finalized review",
+        "passed": true
+      },
+      {
+        "name": "Cross-origin mutation blocked",
+        "passed": true
+      },
+      {
+        "name": "Full reprocessing preserves human work",
+        "passed": true
+      },
+      {
+        "name": "API submission exact schema",
+        "passed": true
+      },
+      {
+        "name": "New visitor has isolated persistent workspace",
+        "passed": true
+      },
+      {
+        "name": "Missing originals prevent finalization",
+        "passed": true
+      },
+      {
+        "name": "Unresolved case retry succeeds and remains visible",
+        "passed": true
+      }
+    ],
+    "passed": 14,
+    "failed": 0
+  },
+  "documentApi": {
+    "checkedAt": "2026-09-22T02:38:22.704Z",
+    "base": "https://cargoguard-shipping.netlify.app",
+    "passed": 11,
+    "failed": 0,
+    "checks": [
+      {
+        "name": "Document workspace and session initialization",
+        "passed": true
+      },
+      {
+        "name": "OCR cannot automatically finalize or assert defects",
+        "passed": true
+      },
+      {
+        "name": "Source attestation required",
+        "passed": true
+      },
+      {
+        "name": "Incomplete values cannot finalize",
+        "passed": true
+      },
+      {
+        "name": "Human confirmation reuses frozen normalization and review",
+        "passed": true
+      },
+      {
+        "name": "Stale revisions rejected",
+        "passed": true
+      },
+      {
+        "name": "Retry preserves finalized human work",
+        "passed": true
+      },
+      {
+        "name": "Document evidence and audit persist in D1",
+        "passed": true
+      },
+      {
+        "name": "Cross-origin, pair count, and body size guards",
+        "passed": true
+      },
+      {
+        "name": "Official 520-email export remains unchanged after upload/review",
+        "passed": true
+      },
+      {
+        "name": "Upload cases are isolated by visitor session",
+        "passed": true
+      }
+    ]
+  },
+  "transport": {
+    "checkedAt": "2026-09-22T02:40:03.353Z",
+    "base": "https://cargoguard-shipping.netlify.app",
+    "cookie": {
+      "hostOnly": true,
+      "HttpOnly": true,
+      "Secure": true,
+      "SameSite": "Strict",
+      "Path": "/",
+      "valueRecorded": false
+    },
+    "cacheControl": "no-store",
+    "checks": [
+      {
+        "path": "/api/health?probe=one%20two&probe=%2B",
+        "status": 200,
+        "detail": "body identical to upstream"
+      },
+      {
+        "path": "/demo/SI-scan.pdf?proxy-test=1",
+        "status": 200,
+        "detail": "body identical to upstream"
+      },
+      {
+        "path": "/api/state",
+        "status": 404,
+        "detail": "upstream status preserved"
+      },
+      {
+        "path": "/_next/proxy-test-missing.js",
+        "status": 404,
+        "detail": "upstream status preserved"
+      },
+      {
+        "path": "/arbitrary/proxy-test-missing?a=1",
+        "status": 404,
+        "detail": "upstream status preserved"
+      },
+      {
+        "method": "PUT",
+        "status": 405,
+        "unsupportedMethodPreserved": true
+      },
+      {
+        "method": "PATCH",
+        "status": 405,
+        "unsupportedMethodPreserved": true
+      },
+      {
+        "method": "DELETE",
+        "status": 405,
+        "unsupportedMethodPreserved": true
+      }
+    ]
+  },
+  "browser": {
+    "viewsPassed": [
+      "Dashboard",
+      "Smart inbox",
+      "Verification",
+      "Human review",
+      "Reports & audit",
+      "Processing",
+      "Upload documents"
+    ],
+    "searchedAndOpened": "email_004",
+    "discrepancies": [
+      "consignee",
+      "notify_party"
+    ],
+    "sourceEvidenceVisible": true,
+    "sourceLinksSameOrigin": true,
+    "reviewSavedWithoutFieldCorrections": true,
+    "reviewPersistedAfterReload": true,
+    "auditEntryVisible": true,
+    "scannedPdf": "SI-scan.pdf",
+    "comparedDocx": "BL-table.docx",
+    "ocrSignal": 95,
+    "ocrStatus": "NEEDS_REVIEW",
+    "sevenFieldsExtracted": true,
+    "uploadedEvidencePersistedAfterReload": true,
+    "addressBarStayedOnNetlify": true,
+    "applicationConsoleErrors": 0,
+    "downloadButtonExercised": true,
+    "downloadCompletionVerified": false
+  },
+  "notes": [
+    "No new official evaluation was run or predictions regenerated; frozen artifact and live submission equality were checked.",
+    "Initial static Origin override failed on Netlify; accepted writes now use explicit guarded edge forwarding.",
+    "The two public hostnames have separate browser session cookies.",
+    "Cloudflare may emit an unrelated domain-scoped bot cookie; cg_session is host-only and works through the proxy.",
+    "Existing /api/state is absent upstream and stays 404; /api/cases is the real state endpoint.",
+    "PUT/PATCH/DELETE forwarding preserves upstream 405 for routes that do not implement those methods.",
+    "Browser report download completion remains unverified in embedded browser."
+  ]
+}

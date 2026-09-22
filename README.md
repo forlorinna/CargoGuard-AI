@@ -4,6 +4,8 @@ Evidence-backed shipping document verification for the Averis × Monash Hackatho
 
 **[Live CargoGuard demo](https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site)** · **[API health](https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site/api/health)** · **[Source](https://github.com/forlorinna/CargoGuard-AI)**
 
+**[Clean-domain demo](https://cargoguard-shipping.netlify.app)** · [Netlify proxy deployment and checks](docs/NETLIFY.md). This proxy keeps the Netlify hostname visible while using the same existing Cloudflare application and D1 backend.
+
 CargoGuard routes a mixed shipping inbox, compares Shipping Instructions (SI) with draft Bills of Lading (BL), exposes discrepancies and evidence, and records human corrections. Its frozen engine achieved **1.0 / 1.0 on the organizer evaluator across all 520 participant emails**. This is an organizer-code benchmark result, **not the hackathon judges’ final score or a guarantee on unseen documents**.
 
 ## Problem and solution

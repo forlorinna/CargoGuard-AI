@@ -95,20 +95,58 @@ so the original PDF/image is not uploaded to Netlify; only extracted evidence is
 POSTed through the proxy. Upstream dependency and Netlify's proxy timeout remain
 operational limits; this is not an independent deployment or a backend migration.
 
+## Verified deployment — 22 September 2026
+
+Published deployment `6ab1e9ca9dc50f0008a51606`, source
+`606e6ea42872fdeac631a7096c9e0fc7337a23a1`, completed in 9 seconds. Netlify reported
+one successful rewrite rule, one Edge Function and a 7.5 KB total deployment.
+The Next.js Runtime was removed in the authenticated dashboard; **no manual
+plugin removal remains necessary for this project**. Build settings now show
+Runtime: Not set. Local Netlify CLI was unavailable; the actual hosted build and
+deployment succeeded instead.
+
+Local TOML parsing, a dependency-free isolated build with no corpus, TypeScript,
+6 proxy security tests, 15 frozen engine tests and 6 document safety tests passed.
+On the public Netlify URL, 14 existing API tests and 11 upload API tests passed,
+including review persistence and visitor isolation. Seven frontend assets,
+250 original attachment hashes, 16 parser/OCR/demo asset hashes and the exact
+520-record frozen submission were verified. All 21 checkpointed files and the
+frozen submission hash remain unchanged. No participant data was added to Git;
+the Cloudflare application, hosting configuration and dependencies were not
+changed or redeployed. Test writes only created review/audit records in isolated
+test sessions, as required to verify the existing D1-backed behavior.
+
+The browser successfully searched and opened `email_004`, displayed both actual
+discrepancies and source text, saved a review without field corrections, and
+retained it after reload. Reports showed the audit entry. The scanned PDF example
+produced all seven fields with a real OCR signal of 95/100 and stayed in
+NEEDS_REVIEW, as designed. Its evidence also survived reload. All seven navigation
+views retained the Netlify hostname. No application console errors were observed.
+
+The report export button was exercised without an application error, but the
+embedded browser did not emit a download event. Browser download completion is
+therefore **not verified**; `/api/submission` and its frozen JSON contents are
+verified. No remaining cookie, Origin, upload or OCR proxy failure was observed.
+Sessions on the old and new domains remain separate; original upload files still
+remain device-local. The existing learned-OCR review behavior is unchanged.
+
+Full machine-check results: [Netlify verification record](deployment/netlify-proxy-verification.json).
+
 ## After-deployment acceptance checklist
 
-- [ ] Homepage and Dashboard load on the Netlify hostname.
-- [ ] Smart Inbox opens; search `email_004` and open the result.
-- [ ] Verification shows source evidence plus Consignee and Notify Party discrepancies.
-- [ ] Human Review loads; save a review and reload to verify persistence.
-- [ ] Confirm `cg_session` remains host-only, HttpOnly, Secure and SameSite=Strict.
-- [ ] Same-origin POST works; foreign and `null` Origin writes fail.
-- [ ] Upload documents loads; OCR/runtime assets return successfully.
-- [ ] Process the synthetic `SI-scan.pdf` example and inspect evidence/review status.
-- [ ] `/api/health` returns the existing 520-email D1 application health.
-- [ ] Reports, audit and submission/export endpoints work.
-- [ ] Paths and query strings are preserved; missing upstream routes stay 404.
-- [ ] All navigation and source links keep the Netlify hostname in the address bar.
+- [x] Homepage and Dashboard load on the Netlify hostname.
+- [x] Smart Inbox opens; search `email_004` and open the result.
+- [x] Verification shows source evidence plus Consignee and Notify Party discrepancies.
+- [x] Human Review loads; save a review and reload to verify persistence.
+- [x] Confirm `cg_session` remains host-only, HttpOnly, Secure and SameSite=Strict.
+- [x] Same-origin POST works; foreign and `null` Origin writes fail.
+- [x] Upload documents loads; OCR/runtime assets return successfully.
+- [x] Process the synthetic `SI-scan.pdf` example and inspect evidence/review status.
+- [x] `/api/health` returns the existing 520-email D1 application health.
+- [x] Reports and audit render; `/api/submission` returns the exact frozen JSON.
+- [x] Paths and query strings are preserved; missing upstream routes stay 404.
+- [x] All tested navigation stays on Netlify; original source links are same-origin.
+- [ ] Confirm the browser saves the exported JSON/report file to disk (see limitation above).
 
 Authoritative platform references:
 [rewrites and proxies](https://docs.netlify.com/manage/routing/redirects/rewrites-proxies/),
