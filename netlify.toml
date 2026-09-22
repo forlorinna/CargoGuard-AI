@@ -1,0 +1,9 @@
+[build]
+  command = "mkdir -p netlify-proxy && printf 'CargoGuard proxy entry\n' > netlify-proxy/index.html"
+  publish = "netlify-proxy"
+
+[[redirects]]
+  from = "/*"
+  to = "https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site/:splat"
+  status = 200
+  force = true
