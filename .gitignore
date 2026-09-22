@@ -99,3 +99,7 @@ Thumbs.db
 Desktop.ini
 .idea/
 .vscode/
+
+# Isolated Netlify proxy output and local CLI state
+.netlify/
+/netlify-proxy/public/

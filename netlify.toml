@@ -1,9 +1,23 @@
 [build]
-  command = "mkdir -p netlify-proxy && printf 'CargoGuard proxy entry\n' > netlify-proxy/index.html"
-  publish = "netlify-proxy"
+  # Isolate framework/dependency detection from the frozen Cloudflare application.
+  base = "netlify-proxy"
+  command = "node build.mjs"
+  publish = "public"
+  edge_functions = "edge-functions"
+
+[build.environment]
+  # Defensive legacy-runtime opt-out; does NOT uninstall a UI-enabled plugin.
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+[[edge_functions]]
+  path = "/*"
+  function = "origin-guard"
 
 [[redirects]]
   from = "/*"
   to = "https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site/:splat"
   status = 200
   force = true
+  # Only translate Origin AFTER origin-guard has checked the browser's Origin.
+  # Never deploy this header override without the fail-closed guard.
+  headers = { Origin = "https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site" }
