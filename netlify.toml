@@ -18,6 +18,3 @@
   to = "https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site/:splat"
   status = 200
   force = true
-  # Only translate Origin AFTER origin-guard has checked the browser's Origin.
-  # Never deploy this header override without the fail-closed guard.
-  headers = { Origin = "https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site" }

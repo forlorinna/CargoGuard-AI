@@ -51,12 +51,21 @@ passed the origin check and reached the expected unknown-case validation.
 
 The only Edge Function is a transport guard on **all paths**. It rejects unsafe
 methods whose incoming Origin differs from the requested site's origin, as well
-as requests marked `Sec-Fetch-Site: cross-site`. It then lets Netlify's ordinary
-wildcard proxy run, which translates Origin to the fixed upstream origin. Body,
-method, cookies, path and query are untouched. Missing-Origin non-browser clients
-retain existing backend semantics. Errors fail closed; no response caching is
-enabled on the guard. **Never remove the guard while retaining the Origin header
-override.** No permissive CORS headers or backend security exceptions are added.
+as requests marked `Sec-Fetch-Site: cross-site`. For accepted writes it streams
+the original request to the fixed upstream with an explicitly translated Origin.
+Method, cookies, path, query and body are preserved; Host and Content-Length are
+recomputed by fetch. The upstream Response, including status and Set-Cookie, is
+returned unchanged. GET/HEAD/OPTIONS continue through the static wildcard proxy.
+Missing-Origin non-browser clients retain existing backend semantics. Errors
+fail closed; no response caching is enabled on the guard. No permissive CORS
+headers or backend security exceptions are added. This tiny transport adapter
+contains no application handlers, payload interpretation or storage.
+
+The first live deployment proved that a TOML proxy `headers.Origin` setting alone
+did not make same-origin writes pass the upstream check. That setting was removed
+in favor of explicit forwarding of validated writes. Without the Edge Function,
+the upstream would still reject mismatched browser origins rather than accept
+unchecked mutations.
 
 `cg_session` is host-only, `HttpOnly; Secure; SameSite=Strict; Path=/`, with a
 30-day lifetime. A browser should store the proxied Set-Cookie for the Netlify

@@ -3,17 +3,29 @@ import {test} from 'node:test';
 import guard, {config} from './edge-functions/origin-guard.js';
 
 const origin = 'https://cargoguard-shipping.netlify.app';
-test('same-origin writes preserve all methods, body, query and session headers', async () => {
+test('same-origin writes preserve all methods, body, query and session headers', async t => {
+  const calls = [];
+  t.mock.method(globalThis, 'fetch', async (url, init) => {
+    calls.push(new Request(url, init));
+    return new Response('upstream validation result', {status: 400, headers: {'Set-Cookie':'cg_session=test; HttpOnly; Secure; SameSite=Strict; Path=/'}});
+  });
   for (const method of ['POST', 'PUT', 'PATCH', 'DELETE']) {
     const request = new Request(origin + '/api/documents?a=one%20two&a=%2B', {
       method, body: 'unchanged body',
       headers: {Origin: origin, Cookie: 'cg_session=test-session', 'Content-Type': 'text/plain'},
     });
-    assert.equal(guard(request), undefined);
-    assert.equal(request.bodyUsed, false);
-    assert.equal(await request.text(), 'unchanged body');
-    assert.equal(request.headers.get('cookie'), 'cg_session=test-session');
-    assert.equal(new URL(request.url).search, '?a=one%20two&a=%2B');
+    const response = await guard(request);
+    const forwarded = calls.at(-1);
+    assert.equal(response.status, 400);
+    assert.equal(response.headers.get('set-cookie'), 'cg_session=test; HttpOnly; Secure; SameSite=Strict; Path=/');
+    assert.equal(await forwarded.text(), 'unchanged body');
+    assert.equal(forwarded.method, method);
+    assert.equal(forwarded.headers.get('cookie'), 'cg_session=test-session');
+    assert.equal(new URL(forwarded.url).search, '?a=one%20two&a=%2B');
+    assert.equal(new URL(forwarded.url).pathname, '/api/documents');
+    assert.equal(forwarded.headers.get('origin'), 'https://cargoguard-shipping-verify.xiongrunxin.chatgpt.site');
+    assert.equal(new URL(forwarded.url).origin, forwarded.headers.get('origin'));
+    assert.equal(forwarded.redirect, 'manual');
   }
 });
 test('foreign, null, sibling and upstream origins cannot bypass the guard', () => {
@@ -30,8 +42,9 @@ test('guard covers arbitrary paths and rejects contradictory browser metadata', 
     assert.equal(guard(r).status, 403);
   }
 });
-test('originless non-browser writes retain existing backend semantics', () => {
-  assert.equal(guard(new Request(origin + '/api/retry', {method: 'POST'})), undefined);
+test('originless non-browser writes retain existing backend semantics', async t => {
+  t.mock.method(globalThis, 'fetch', async () => new Response('forwarded'));
+  assert.equal(await (await guard(new Request(origin + '/api/retry', {method: 'POST'}))).text(), 'forwarded');
   assert.equal(guard(new Request(origin + '/api/retry', {method: 'POST', headers: {'Sec-Fetch-Site': 'cross-site'}})).status, 403);
 });
 test('safe methods pass through without reading the body or inventing API responses', () => {
